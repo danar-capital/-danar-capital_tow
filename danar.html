@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DANAR CAPITAL — ابدأ رحلتك الاستثمارية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cairo:wght@300;400;600;700;900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --black: #0A0A0A;
+  --white: #F5F2EC;
+  --gray-1: #1A1A1A;
+  --gray-2: #2E2E2E;
+  --gray-3: #5A5A5A;
+  --gray-4: #8A8A8A;
+  --gray-5: #C4C0B8;
+  --gray-6: #E0DDD7;
+  --border: #D0CCC4;
+  --ink: #0A0A0A;
+  --paper: #F5F2EC;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Cairo', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Grain */
+body::after {
+  content:'';
+  position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:9000;
+}
+
+/* CURSOR */
+.cur { position:fixed; width:10px; height:10px; background:var(--black); border-radius:50%; pointer-events:none; z-index:8999; transform:translate(-50%,-50%); transition:transform .1s; mix-blend-mode:difference; }
+.cur-ring { position:fixed; width:36px; height:36px; border:1px solid var(--black); border-radius:50%; pointer-events:none; z-index:8998; transform:translate(-50%,-50%); transition:all .18s cubic-bezier(.25,.46,.45,.94); mix-blend-mode:difference; }
+
+/* TICKER — top */
+.ticker-top {
+  position:fixed; top:0; left:0; right:0; z-index:700;
+  background:var(--black); color:var(--white);
+  height:32px; overflow:hidden; display:flex; align-items:center;
+  border-bottom:1px solid var(--gray-2);
+}
+.ticker-track {
+  display:flex; gap:48px; white-space:nowrap;
+  animation: scroll-left 25s linear infinite;
+  width: max-content;
+}
+.ticker-item { display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:1px; }
+.ti-pair { font-weight:700; }
+.ti-val { color:var(--gray-5); }
+.ti-up { color:#ccc; }
+.ti-down { color:#666; }
+.ti-sep { width:1px; height:14px; background:var(--gray-2); }
+@keyframes scroll-left { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* NAV */
+nav {
+  position:fixed; top:32px; left:0; right:0; z-index:600;
+  border-bottom:2px solid var(--black);
+  background:var(--paper);
+  display:flex; align-items:stretch;
+  height:64px;
+}
+.nav-logo-box {
+  padding:0 32px;
+  display:flex; align-items:center;
+  border-left:1px solid var(--black);
+  text-decoration:none; color:var(--black);
+  gap:14px;
+}
+.nav-logo-mark {
+  font-family:var(--serif); font-size:22px; font-weight:900; font-style:italic;
+  letter-spacing:-0.5px; line-height:1;
+}
+.nav-logo-sub { font-family:var(--mono); font-size:9px; letter-spacing:3px; color:var(--gray-3); text-transform:uppercase; }
+.nav-divider { width:1px; background:var(--black); }
+.nav-links {
+  display:flex; flex:1; list-style:none;
+}
+.nav-links li { border-left:1px solid var(--black); }
+.nav-links a {
+  display:flex; align-items:center; padding:0 24px;
+  height:100%; text-decoration:none;
+  font-family:var(--mono); font-size:11px; font-weight:500;
+  color:var(--gray-3); letter-spacing:1.5px; text-transform:uppercase;
+  transition:background .2s, color .2s;
+}
+.nav-links a:hover { background:var(--black); color:var(--white); }
+.nav-cta {
+  margin-right:auto;
+  display:flex; align-items:center; padding:0 32px;
+  border-right:1px solid var(--black);
+  font-family:var(--mono); font-size:11px; font-weight:700;
+  color:var(--black); text-decoration:none; letter-spacing:2px; text-transform:uppercase;
+  background:transparent; transition:background .2s, color .2s;
+}
+.nav-cta:hover { background:var(--black); color:var(--white); }
+
+/* HERO — magazine cover feel */
+#hero {
+  padding-top:96px; /* 32px ticker + 64px nav */
+  min-height:100vh;
+  display:grid;
+  grid-template-rows: auto 1fr;
+}
+
+.hero-dateline {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 48px;
+  border-bottom:1px solid var(--border);
+  font-family:var(--mono); font-size:11px; color:var(--gray-3); letter-spacing:1px;
+}
+.hero-vol { display:flex; gap:24px; }
+
+.hero-body {
+  display:grid;
+  grid-template-columns:1fr 2px 1fr 2px 1fr;
+  border-bottom:2px solid var(--black);
+}
+.hero-col { padding:0; overflow:hidden; position:relative; }
+.hero-col-mid { padding:0 40px; display:flex; flex-direction:column; justify-content:space-between; border-top:none; }
+.vbar { background:var(--black); }
+
+/* left col */
+.hero-left { padding:48px; display:flex; flex-direction:column; justify-content:space-between; }
+.hero-eyebrow {
+  font-family:var(--mono); font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gray-3); margin-bottom:24px;
+  padding-bottom:12px; border-bottom:1px solid var(--border);
+}
+.hero-kicker {
+  font-family:var(--serif); font-size:clamp(52px,6vw,88px); font-weight:900;
+  line-height:.95; letter-spacing:-2px;
+  margin-bottom:0;
+}
+.hero-kicker em { font-style:italic; display:block; }
+.hero-stats-col {
+  display:flex; flex-direction:column; gap:1px; margin-top:40px;
+  border:1px solid var(--black);
+}
+.hsc { padding:20px 16px; border-bottom:1px solid var(--border); }
+.hsc:last-child { border-bottom:none; }
+.hsc-num { font-family:var(--serif); font-size:36px; font-weight:900; line-height:1; }
+.hsc-lbl { font-family:var(--mono); font-size:10px; color:var(--gray-3); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
+
+/* center col */
+.hero-center-top {
+  border-bottom:2px solid var(--black);
+  padding:40px;
+  flex:1;
+  display:flex; flex-direction:column; justify-content:center;
+  min-height:320px;
+}
+.hero-center-hed {
+  font-family:var(--serif); font-size:clamp(18px,2vw,26px);
+  font-weight:700; line-height:1.4; margin-bottom:20px;
+}
+.hero-center-dek {
+  font-size:14px; color:var(--gray-3); line-height:1.9;
+}
+.hero-center-bottom { padding:40px; }
+.free-tag {
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--black); padding:10px 20px;
+  font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:24px;
+}
+.free-tag::before { content:'●'; font-size:8px; animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.hero-links { display:flex; flex-direction:column; gap:1px; }
+.hero-link-item {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 0; border-bottom:1px solid var(--border);
+  text-decoration:none; color:var(--black);
+  font-family:var(--mono); font-size:12px; letter-spacing:1px;
+  transition:padding-right .3s;
+  group: true;
+}
+.hero-link-item:hover { padding-right:12px; }
+.hero-link-item span:last-child { opacity:.3; }
+
+/* right col — chart territory */
+.hero-right {
+  padding:0; display:flex; flex-direction:column;
+  border-right:none;
+}
+.hero-right-header {
+  padding:24px 32px; border-bottom:1px solid var(--border);
+  font-family:var(--mono); font-size:11px; color:var(--gray-3); letter-spacing:1px;
+  display:flex; justify-content:space-between;
+}
+.signal-list { flex:1; display:flex; flex-direction:column; }
+.signal-entry {
+  display:grid; grid-template-columns:1fr auto auto;
+  align-items:center; gap:16px;
+  padding:20px 32px; border-bottom:1px solid var(--border);
+  transition:background .2s;
+}
+.signal-entry:hover { background:var(--gray-6); }
+.se-pair { font-family:var(--serif); font-size:20px; font-weight:700; }
+.se-dir {
+  font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:2px;
+  padding:4px 10px; border:1px solid var(--black); text-transform:uppercase;
+}
+.se-dir.buy { background:var(--black); color:var(--white); }
+.se-dir.sell { background:transparent; color:var(--black); }
+.se-price { font-family:var(--mono); font-size:12px; color:var(--gray-3); }
+.mini-chart {
+  padding:24px 32px; border-top:2px solid var(--black);
+}
+.mini-chart-label {
+  font-family:var(--mono); font-size:10px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--gray-3); margin-bottom:16px;
+}
+.chart-svg-bw { width:100%; height:100px; display:block; }
+
+/* === SECTIONS === */
+section { }
+
+/* PULL-QUOTE DIVIDER */
+.pull-quote {
+  border-top:4px solid var(--black); border-bottom:4px solid var(--black);
+  padding:64px 48px;
+  display:grid; grid-template-columns:80px 1fr;
+  gap:40px; align-items:center;
+}
+.pq-rule { width:2px; background:var(--black); align-self:stretch; }
+.pq-text {
+  font-family:var(--serif); font-size:clamp(28px,4vw,52px);
+  font-weight:400; font-style:italic; line-height:1.2;
+}
+.pq-attr { font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--gray-3); text-transform:uppercase; margin-top:16px; }
+
+/* ABOUT — editorial two col */
+#about {
+  display:grid; grid-template-columns:1fr 1fr;
+  border-top:2px solid var(--black);
+}
+.about-left {
+  padding:72px 56px;
+  border-left:1px solid var(--black);
+}
+.about-right {
+  padding:72px 56px;
+  background:var(--black); color:var(--white);
+}
+.section-label {
+  font-family:var(--mono); font-size:10px; letter-spacing:4px; text-transform:uppercase;
+  color:var(--gray-3); margin-bottom:32px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-label::before { content:''; width:20px; height:1px; background:currentColor; display:inline-block; }
+.about-left .section-label { color:var(--gray-3); }
+.about-right .section-label { color:var(--gray-4); }
+.about-hed {
+  font-family:var(--serif); font-size:clamp(36px,4vw,58px); font-weight:900;
+  line-height:1.05; letter-spacing:-1px; margin-bottom:32px;
+}
+.about-right .about-hed { color:var(--white); }
+.about-body { font-size:15px; line-height:2; color:var(--gray-3); }
+.about-right .about-body { color:var(--gray-5); }
+.about-body + .about-body { margin-top:20px; }
+
+.about-timeline {
+  margin-top:48px; display:flex; flex-direction:column; gap:0;
+}
+.tl-item {
+  display:grid; grid-template-columns:80px 1fr;
+  padding:20px 0; border-bottom:1px solid rgba(255,255,255,0.12);
+  gap:20px;
+}
+.tl-year { font-family:var(--mono); font-size:13px; font-weight:700; color:rgba(255,255,255,0.4); }
+.tl-event { font-size:14px; line-height:1.7; color:var(--gray-5); }
+
+/* SERVICES — magazine grid */
+#services {
+  border-top:2px solid var(--black);
+}
+.services-top {
+  padding:56px 48px 40px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:40px;
+}
+.services-hed {
+  font-family:var(--serif); font-size:clamp(40px,5vw,72px);
+  font-weight:900; line-height:.95; letter-spacing:-2px;
+}
+.services-intro {
+  max-width:380px; font-size:14px; color:var(--gray-3); line-height:1.9;
+}
+.services-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  border-bottom:2px solid var(--black);
+}
+.svc {
+  padding:56px 48px; position:relative; overflow:hidden;
+  border-bottom:1px solid var(--black);
+  border-left:1px solid var(--black);
+  transition:background .3s;
+  cursor:default;
+}
+.svc:nth-child(odd) { border-left:none; }
+.svc:hover { background:var(--black); }
+.svc:hover .svc-num,
+.svc:hover .svc-name,
+.svc:hover .svc-body { color:var(--white); }
+.svc:hover .svc-cta { color:var(--white); border-color:rgba(255,255,255,0.3); }
+.svc-num {
+  font-family:var(--serif); font-size:120px; font-weight:900;
+  color:var(--gray-6); line-height:1; position:absolute;
+  top:-16px; left:32px; pointer-events:none;
+  transition:color .3s;
+}
+.svc-name {
+  font-family:var(--serif); font-size:28px; font-weight:700;
+  margin-bottom:16px; margin-top:60px; position:relative;
+  transition:color .3s;
+}
+.svc-body {
+  font-size:14px; color:var(--gray-3); line-height:1.85; position:relative;
+  transition:color .3s;
+}
+.svc-cta {
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:32px; font-family:var(--mono); font-size:11px;
+  letter-spacing:2px; text-transform:uppercase; text-decoration:none;
+  color:var(--black); border-bottom:1px solid var(--black); padding-bottom:2px;
+  transition:color .3s, border-color .3s;
+}
+.free-row {
+  padding:24px 48px;
+  border-bottom:1px solid var(--border);
+  font-family:var(--mono); font-size:13px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--gray-3);
+  display:flex; align-items:center; gap:16px;
+}
+.free-row::before { content:'✦'; font-size:16px; color:var(--black); }
+
+/* PORTFOLIO */
+#portfolio {
+  border-top:2px solid var(--black);
+  display:grid; grid-template-columns:3fr 2fr;
+}
+.port-left { padding:72px 56px; border-left:1px solid var(--black); }
+.port-right { padding:72px 48px; background:var(--gray-1); color:var(--white); }
+.port-hed {
+  font-family:var(--serif); font-size:clamp(36px,4vw,60px);
+  font-weight:900; line-height:1.0; letter-spacing:-1.5px;
+  margin-bottom:40px;
+}
+.port-right .port-hed { color:var(--white); }
+.port-feat-list { display:flex; flex-direction:column; gap:0; margin-top:40px; }
+.pfl {
+  display:flex; gap:20px; align-items:flex-start;
+  padding:24px 0; border-bottom:1px solid var(--border);
+}
+.pfl-icon {
+  font-family:var(--mono); font-size:10px; font-weight:700;
+  letter-spacing:1px; color:var(--gray-3); min-width:32px; padding-top:2px;
+}
+.pfl-title { font-size:15px; font-weight:700; margin-bottom:4px; }
+.pfl-desc { font-size:13px; color:var(--gray-3); line-height:1.7; }
+.port-metrics {
+  display:grid; grid-template-columns:1fr 1fr; gap:1px;
+  background:rgba(255,255,255,0.08);
+  margin-bottom:32px;
+}
+.pm {
+  background:var(--gray-1); padding:28px 24px;
+}
+.pm-val {
+  font-family:var(--serif); font-size:36px; font-weight:900;
+  color:var(--white); line-height:1; margin-bottom:6px;
+}
+.pm-lbl { font-family:var(--mono); font-size:10px; color:var(--gray-4); letter-spacing:1.5px; text-transform:uppercase; }
+.port-markets-label {
+  font-family:var(--mono); font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gray-4); margin-bottom:16px;
+}
+.port-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.ptag {
+  border:1px solid rgba(255,255,255,0.2); padding:6px 14px;
+  font-family:var(--mono); font-size:11px; letter-spacing:1px; color:var(--gray-5);
+}
+.port-cta-btn {
+  display:block; margin-top:40px;
+  background:var(--white); color:var(--black);
+  padding:18px 32px; text-decoration:none;
+  font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  text-align:center; transition:background .3s, color .3s;
+  border:1px solid var(--white);
+}
+.port-cta-btn:hover { background:transparent; color:var(--white); }
+
+/* PARTNERS */
+#partners {
+  border-top:2px solid var(--black);
+  padding:80px 48px;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; align-items:center;
+}
+.partners-left .section-label { color:var(--gray-3); }
+.partners-hed {
+  font-family:var(--serif); font-size:clamp(36px,4vw,60px);
+  font-weight:900; line-height:1.0; letter-spacing:-1.5px; margin-bottom:24px;
+}
+.partners-desc { font-size:14px; color:var(--gray-3); line-height:1.9; }
+.xtb-card {
+  border:2px solid var(--black); position:relative; overflow:hidden;
+}
+.xtb-header {
+  padding:40px; border-bottom:1px solid var(--black);
+  display:flex; align-items:center; gap:24px;
+}
+.xtb-monogram {
+  width:64px; height:64px; background:var(--black);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif); font-size:24px; font-weight:900; color:var(--white); font-style:italic;
+}
+.xtb-info .xtb-name { font-family:var(--serif); font-size:32px; font-weight:900; }
+.xtb-info .xtb-since { font-family:var(--mono); font-size:11px; color:var(--gray-3); letter-spacing:1px; margin-top:4px; }
+.xtb-body { padding:32px 40px; font-size:14px; color:var(--gray-3); line-height:1.9; border-bottom:1px solid var(--black); }
+.xtb-cta {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:24px 40px; background:var(--black); color:var(--white);
+  text-decoration:none; transition:background .3s;
+}
+.xtb-cta:hover { background:var(--gray-1); }
+.xtb-cta span { font-family:var(--mono); font-size:12px; letter-spacing:2px; text-transform:uppercase; font-weight:700; }
+.xtb-cta .arr { font-size:20px; }
+
+/* SOCIAL */
+#social {
+  border-top:2px solid var(--black);
+}
+.social-header {
+  padding:56px 48px 40px;
+  border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:flex-end;
+}
+.social-hed {
+  font-family:var(--serif); font-size:clamp(36px,4vw,60px);
+  font-weight:900; line-height:1; letter-spacing:-1.5px;
+}
+.social-note { font-family:var(--mono); font-size:11px; color:var(--gray-3); letter-spacing:1px; max-width:280px; line-height:1.7; }
+.social-grid-row {
+  display:grid; grid-template-columns:repeat(5, 1fr);
+  border-bottom:2px solid var(--black);
+}
+.soc-card {
+  padding:48px 32px; border-left:1px solid var(--black);
+  text-decoration:none; color:var(--black);
+  display:flex; flex-direction:column; justify-content:space-between;
+  min-height:200px; transition:background .3s, color .3s;
+  overflow:hidden; position:relative;
+}
+.soc-card:first-child { border-left:none; }
+.soc-card:hover { background:var(--black); color:var(--white); }
+.soc-card:hover .soc-handle { color:rgba(255,255,255,0.4); }
+.soc-name {
+  font-family:var(--serif); font-size:22px; font-weight:700;
+  line-height:1.2; margin-bottom:8px;
+}
+.soc-handle { font-family:var(--mono); font-size:11px; color:var(--gray-3); letter-spacing:1px; transition:color .3s; }
+.soc-arrow { font-family:var(--serif); font-size:32px; font-weight:900; align-self:flex-end; }
+
+/* DISCLAIMER */
+.disc-bar {
+  background:var(--gray-6); border-top:1px solid var(--border);
+  padding:20px 48px;
+  font-family:var(--mono); font-size:11px; color:var(--gray-3); line-height:1.8; text-align:center;
+  letter-spacing:0.3px;
+}
+
+/* FOOTER */
+footer {
+  background:var(--black); color:var(--white);
+  border-top:3px solid var(--black);
+}
+.footer-masthead {
+  padding:56px 48px 40px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  display:grid; grid-template-columns:2fr 1fr 1fr;
+  gap:60px;
+}
+.footer-brand-name {
+  font-family:var(--serif); font-size:42px; font-weight:900;
+  font-style:italic; line-height:1; letter-spacing:-1px;
+  margin-bottom:16px; color:var(--white);
+}
+.footer-tagline { font-family:var(--mono); font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:20px; }
+.footer-desc { font-size:13px; color:rgba(255,255,255,0.4); line-height:1.9; max-width:300px; }
+.footer-col h4 {
+  font-family:var(--mono); font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.3); margin-bottom:20px; padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.footer-col ul { list-style:none; }
+.footer-col ul li { border-bottom:1px solid rgba(255,255,255,0.06); }
+.footer-col ul a {
+  display:block; padding:10px 0; text-decoration:none;
+  font-size:13px; color:rgba(255,255,255,0.5);
+  transition:color .2s, padding-right .3s;
+  font-family:var(--mono); letter-spacing:0.5px;
+}
+.footer-col ul a:hover { color:var(--white); padding-right:6px; }
+.footer-bottom {
+  padding:24px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.footer-copy { font-family:var(--mono); font-size:11px; color:rgba(255,255,255,0.25); letter-spacing:1px; }
+.footer-edition { font-family:var(--serif); font-size:13px; font-style:italic; color:rgba(255,255,255,0.2); }
+
+/* SCROLL ANIMATIONS */
+.fade-up { opacity:0; transform:translateY(40px); transition:opacity .8s ease, transform .8s ease; }
+.fade-up.in { opacity:1; transform:none; }
+.fade-left { opacity:0; transform:translateX(30px); transition:opacity .8s ease, transform .8s ease; }
+.fade-left.in { opacity:1; transform:none; }
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .hero-body { grid-template-columns:1fr; }
+  .vbar { display:none; }
+  #about { grid-template-columns:1fr; }
+  .services-grid { grid-template-columns:1fr; }
+  .svc:nth-child(odd){ border-left:1px solid var(--black); }
+  #portfolio { grid-template-columns:1fr; }
+  #partners { grid-template-columns:1fr; }
+  .social-grid-row { grid-template-columns:1fr 1fr; }
+  .footer-masthead { grid-template-columns:1fr; gap:32px; }
+  nav .nav-links { display:none; }
+}
+@media(max-width:700px){
+  .pull-quote { grid-template-columns:1fr; padding:40px 32px; }
+  .services-top { flex-direction:column; padding:40px 32px; }
+  .social-grid-row { grid-template-columns:1fr; }
+  .hero-dateline { padding:12px 24px; }
+  .hero-left,.hero-center-top,.hero-center-bottom { padding:32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="c"></div>
+<div class="cur-ring" id="cr"></div>
+
+<!-- TICKER TOP -->
+<div class="ticker-top">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ti-pair">XAUUSD</span><span class="ti-val">3,285.40</span><span class="ti-up">▲ +0.74%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">EURUSD</span><span class="ti-val">1.0842</span><span class="ti-up">▲ +0.21%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">GBPUSD</span><span class="ti-val">1.2731</span><span class="ti-down">▼ -0.12%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">USDJPY</span><span class="ti-val">144.82</span><span class="ti-up">▲ +0.33%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">USOIL</span><span class="ti-val">76.84</span><span class="ti-down">▼ -0.45%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">US500</span><span class="ti-val">5,642</span><span class="ti-up">▲ +0.61%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">BTCUSD</span><span class="ti-val">68,420</span><span class="ti-up">▲ +1.23%</span></div>
+    <div class="ti-sep"></div>
+    <!-- duplicate -->
+    <div class="ticker-item"><span class="ti-pair">XAUUSD</span><span class="ti-val">3,285.40</span><span class="ti-up">▲ +0.74%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">EURUSD</span><span class="ti-val">1.0842</span><span class="ti-up">▲ +0.21%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">GBPUSD</span><span class="ti-val">1.2731</span><span class="ti-down">▼ -0.12%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">USDJPY</span><span class="ti-val">144.82</span><span class="ti-up">▲ +0.33%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">USOIL</span><span class="ti-val">76.84</span><span class="ti-down">▼ -0.45%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">US500</span><span class="ti-val">5,642</span><span class="ti-up">▲ +0.61%</span></div>
+    <div class="ti-sep"></div>
+    <div class="ticker-item"><span class="ti-pair">BTCUSD</span><span class="ti-val">68,420</span><span class="ti-up">▲ +1.23%</span></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo-box">
+    <div>
+      <div class="nav-logo-mark">Danar</div>
+      <div class="nav-logo-sub">Capital · Since 2018</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="#services">الخدمات</a></li>
+    <li><a href="#portfolio">المحفظة</a></li>
+    <li><a href="#partners">شركاؤنا</a></li>
+    <li><a href="#social">تواصل</a></li>
+  </ul>
+  <a href="https://t.me/Danarcapital" class="nav-cta" target="_blank">انضم مجاناً →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-dateline">
+    <div class="hero-vol">
+      <span>VOL. VII — العدد السابع</span>
+      <span>|</span>
+      <span>الأسواق العالمية</span>
+    </div>
+    <span>DANAR CAPITAL REVIEW — 2026</span>
+  </div>
+
+  <div class="hero-body">
+    <!-- LEFT -->
+    <div class="hero-col hero-left">
+      <div>
+        <div class="hero-eyebrow">خبرة خليجية — منذ 2018</div>
+        <h1 class="hero-kicker">
+          ابدأ<br>
+          <em>رحلتك</em><br>
+          الاستثمارية
+        </h1>
+      </div>
+      <div class="hero-stats-col">
+        <div class="hsc">
+          <div class="hsc-num">2018</div>
+          <div class="hsc-lbl">سنة الانطلاق</div>
+        </div>
+        <div class="hsc">
+          <div class="hsc-num">1000+</div>
+          <div class="hsc-lbl">متابع ومستفيد</div>
+        </div>
+        <div class="hsc">
+          <div class="hsc-num">4</div>
+          <div class="hsc-lbl">أسواق رئيسية</div>
+        </div>
+        <div class="hsc">
+          <div class="hsc-num">٠</div>
+          <div class="hsc-lbl">تكلفة — مجاني تماماً</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vbar"></div>
+
+    <!-- CENTER -->
+    <div class="hero-col hero-col-mid">
+      <div class="hero-center-top">
+        <h2 class="hero-center-hed">تداول بوعي بخبرة خليجية — فريق متخصص في الفوركس والأسواق العالمية</h2>
+        <p class="hero-center-dek">نقدّم توصيات بيع وشراء، تحليل يومي، محافظ استثمارية، وتعليم من التأسيس حتى الاحتراف — بمنهج واقعي وإدارة مخاطر صارمة.</p>
+      </div>
+      <div class="hero-center-bottom">
+        <div class="free-tag">جميع الخدمات مجانية</div>
+        <div class="hero-links">
+          <a href="https://t.me/Danarcapital" class="hero-link-item" target="_blank">
+            <span>القناة العامة — Telegram</span>
+            <span>↗</span>
+          </a>
+          <a href="#about" class="hero-link-item">
+            <span>تعرف على Danar Capital</span>
+            <span>↓</span>
+          </a>
+          <a href="#services" class="hero-link-item">
+            <span>استكشف الخدمات</span>
+            <span>↓</span>
+          </a>
+          <a href="https://link-pso.xtb.com/pso/FaECo" class="hero-link-item" target="_blank">
+            <span>افتح حساب تداول — XTB</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="vbar"></div>
+
+    <!-- RIGHT — Signals -->
+    <div class="hero-col hero-right">
+      <div class="hero-right-header">
+        <span>إشارات التداول</span>
+        <span>LIVE SIGNALS</span>
+      </div>
+      <div class="signal-list">
+        <div class="signal-entry">
+          <span class="se-pair">XAUUSD</span>
+          <span class="se-dir buy">BUY</span>
+          <span class="se-price">3,285.40</span>
+        </div>
+        <div class="signal-entry">
+          <span class="se-pair">EURUSD</span>
+          <span class="se-dir buy">BUY</span>
+          <span class="se-price">1.0842</span>
+        </div>
+        <div class="signal-entry">
+          <span class="se-pair">GBPJPY</span>
+          <span class="se-dir sell">SELL</span>
+          <span class="se-price">196.24</span>
+        </div>
+        <div class="signal-entry">
+          <span class="se-pair">USOIL</span>
+          <span class="se-dir sell">SELL</span>
+          <span class="se-price">76.84</span>
+        </div>
+        <div class="signal-entry">
+          <span class="se-pair">US500</span>
+          <span class="se-dir buy">BUY</span>
+          <span class="se-price">5,642</span>
+        </div>
+      </div>
+      <div class="mini-chart">
+        <div class="mini-chart-label">XAUUSD — أداء الأسبوع</div>
+        <svg class="chart-svg-bw" viewBox="0 0 400 100" fill="none">
+          <defs>
+            <linearGradient id="bwg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0A0A0A" stop-opacity=".15"/>
+              <stop offset="100%" stop-color="#0A0A0A" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0 75 L50 65 L100 70 L150 50 L200 55 L250 35 L300 30 L350 18 L400 10" stroke="#0A0A0A" stroke-width="2" fill="none"/>
+          <path d="M0 75 L50 65 L100 70 L150 50 L200 55 L250 35 L300 30 L350 18 L400 10 L400 100 L0 100Z" fill="url(#bwg)"/>
+          <circle cx="400" cy="10" r="4" fill="#0A0A0A"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="pull-quote fade-up">
+  <div class="pq-rule"></div>
+  <div>
+    <div class="pq-text">"لم نكن يومًا مجرد محللين نظريين — بل متداولين خضنا تقلبات السوق بأنفسنا."</div>
+    <div class="pq-attr">— فريق Danar Capital · 2018</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left fade-up">
+    <div class="section-label">من نحن</div>
+    <h2 class="about-hed">خبرة خليجية في الأسواق المالية</h2>
+    <p class="about-body">عام 2018، انطلقت Danar Capital كفريق خليجي متخصص في الأسواق المالية، بهدف تقديم نموذج احترافي للتداول والاستثمار يعتمد على الوعي، الانضباط، وإدارة المخاطر.</p>
+    <p class="about-body">نقدّم في Danar Capital مجموعة متكاملة من خدمات التداول والتحليل والتعليم، مبنية على منهج احترافي وإدارة مخاطر صارمة — ومجانية بالكامل.</p>
+  </div>
+  <div class="about-right fade-left">
+    <div class="section-label">المسيرة</div>
+    <h2 class="about-hed">رحلة من التجربة إلى المنهج</h2>
+    <div class="about-timeline">
+      <div class="tl-item">
+        <span class="tl-year">2018</span>
+        <span class="tl-event">انطلاق Danar Capital كفريق خليجي متخصص في أسواق الفوركس والذهب</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2020</span>
+        <span class="tl-event">إطلاق خدمات التعليم المالي والمنهج التدريبي من الصفر للاحتراف</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2022</span>
+        <span class="tl-event">إطلاق المحفظة الاستثمارية الآمنة بإدارة احترافية وضمانات حقيقية</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2024</span>
+        <span class="tl-event">تجاوز 1000+ متابع ومستفيد عبر منصات التواصل الاجتماعي</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2026</span>
+        <span class="tl-event">مواصلة التوسع في الأسواق العالمية مع شراكة XTB العالمية</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-top fade-up">
+    <h2 class="services-hed">خدماتنا</h2>
+    <p class="services-intro">نقدّم مجموعة خدمات عملية في التداول، التحليل، وإدارة المحافظ، مبنية على منهج واقعي وإدارة مخاطر صارمة.</p>
+  </div>
+  <div class="free-row">جميع الخدمات التالية مجانية بالكامل — بلا استثناء</div>
+  <div class="services-grid">
+    <div class="svc fade-up">
+      <span class="svc-num">01</span>
+      <div class="svc-name">توصيات البيع والشراء</div>
+      <p class="svc-body">توصيات دقيقة ومدروسة في أسواق الفوركس، الذهب، والنفط مع نقاط دخول وخروج وإدارة كاملة للمخاطر — يومياً.</p>
+      <a href="https://t.me/Danarcapital" class="svc-cta" target="_blank">انضم للقناة ↗</a>
+    </div>
+    <div class="svc fade-up">
+      <span class="svc-num">02</span>
+      <div class="svc-name">التعليم من الصفر للاحتراف</div>
+      <p class="svc-body">منهج تعليمي شامل يأخذك من أساسيات التداول حتى بناء استراتيجيات احترافية متكاملة — مناسب للمبتدئ والمتوسط.</p>
+      <a href="https://t.me/Danarcapital" class="svc-cta" target="_blank">ابدأ التعلم ↗</a>
+    </div>
+    <div class="svc fade-up">
+      <span class="svc-num">03</span>
+      <div class="svc-name">المحفظة الاستثمارية الآمنة</div>
+      <p class="svc-body">محفظة بإدارة احترافية مع حد خسارة كلي وضمانات حقيقية ومستوى أمان عالٍ جداً — للراغبين في الاستثمار الآمن.</p>
+      <a href="https://t.me/+d3WQ547N7FdiYWQ0" class="svc-cta" target="_blank">عرض النتائج ↗</a>
+    </div>
+    <div class="svc fade-up">
+      <span class="svc-num">04</span>
+      <div class="svc-name">تحليلات وبثوث مباشرة</div>
+      <p class="svc-body">تحليل يومي معمّق للأسواق وبثوث مباشرة لمناقشة الفرص والمخاطر في الوقت الفعلي مع الفريق الخليجي المتخصص.</p>
+      <a href="https://t.me/Danarcapital" class="svc-cta" target="_blank">شاهد البثوث ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="port-left fade-up">
+    <div class="section-label">المحفظة الاستثمارية</div>
+    <h2 class="port-hed">المحفظة الآمنة</h2>
+    <p style="font-size:14px;color:var(--gray-3);line-height:1.9;max-width:480px;">محفظة مُدارة باحترافية تجمع بين النمو التراكمي وإدارة المخاطر الصارمة — نتائج حقيقية وشفافة موثّقة.</p>
+    <div class="port-feat-list">
+      <div class="pfl">
+        <span class="pfl-icon">01</span>
+        <div>
+          <div class="pfl-title">حد خسارة كلي للمحفظة</div>
+          <div class="pfl-desc">سقف محدد للخسائر يحمي رأس مالك في جميع الأحوال</div>
+        </div>
+      </div>
+      <div class="pfl">
+        <span class="pfl-icon">02</span>
+        <div>
+          <div class="pfl-title">ضمانات حقيقية على الخسائر</div>
+          <div class="pfl-desc">منظومة ضمانات فعلية تضمن الحفاظ على رأس المال</div>
+        </div>
+      </div>
+      <div class="pfl">
+        <span class="pfl-icon">03</span>
+        <div>
+          <div class="pfl-title">تداول متعدد الأسواق</div>
+          <div class="pfl-desc">توزيع المحفظة على أسواق متنوعة لتقليل المخاطر</div>
+        </div>
+      </div>
+      <div class="pfl">
+        <span class="pfl-icon">04</span>
+        <div>
+          <div class="pfl-title">نمو تراكمي موثّق</div>
+          <div class="pfl-desc">نتائج حقيقية وشفافة يمكنك الاطلاع عليها الآن</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="port-right fade-left">
+    <div class="section-label">الإحصائيات</div>
+    <h2 class="port-hed">أرقام حقيقية</h2>
+    <div class="port-metrics">
+      <div class="pm">
+        <div class="pm-val">عالٍ</div>
+        <div class="pm-lbl">مستوى الأمان</div>
+      </div>
+      <div class="pm">
+        <div class="pm-val">تراكمي</div>
+        <div class="pm-lbl">نمط النمو</div>
+      </div>
+      <div class="pm">
+        <div class="pm-val">2018</div>
+        <div class="pm-lbl">منذ عام</div>
+      </div>
+      <div class="pm">
+        <div class="pm-val">4+</div>
+        <div class="pm-lbl">أسواق</div>
+      </div>
+    </div>
+    <div class="port-markets-label">الأسواق المشمولة</div>
+    <div class="port-tags">
+      <span class="ptag">XAUUSD — ذهب</span>
+      <span class="ptag">Forex — فوركس</span>
+      <span class="ptag">Oil — نفط</span>
+      <span class="ptag">Indices — مؤشرات</span>
+    </div>
+    <a href="https://t.me/+d3WQ547N7FdiYWQ0" class="port-cta-btn" target="_blank">عرض نتائج المحفظة الحقيقية</a>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="partners-left fade-up">
+    <div class="section-label">شركاؤنا</div>
+    <h2 class="partners-hed">شريكنا في التداول</h2>
+    <p class="partners-desc">افتح حسابك عبر شريكنا العالمي الموثوق للحصول على أفضل تجربة تداول — مرخّص ومنظّم من جهات عالمية معتمدة.</p>
+  </div>
+  <div class="fade-left">
+    <div class="xtb-card">
+      <div class="xtb-header">
+        <div class="xtb-monogram">XTB</div>
+        <div class="xtb-info">
+          <div class="xtb-name">XTB</div>
+          <div class="xtb-since">تأسس عام 2002 — بروكر عالمي</div>
+        </div>
+      </div>
+      <div class="xtb-body">
+        يوفّر الوصول إلى الأسواق المالية المتنوعة بمنصة تداول احترافية وتنفيذ سريع ورسوم تنافسية، مرخّص ومنظّم دولياً.
+      </div>
+      <a href="https://link-pso.xtb.com/pso/FaECo" class="xtb-cta" target="_blank">
+        <span>افتح حساب مجاني الآن</span>
+        <span class="arr">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social">
+  <div class="social-header fade-up">
+    <h2 class="social-hed">تابعنا</h2>
+    <p class="social-note">كن أول من يتلقى التوصيات والتحليلات — انضم عبر منصاتنا الآن</p>
+  </div>
+  <div class="social-grid-row">
+    <a href="https://www.instagram.com/danarcapital/" class="soc-card" target="_blank">
+      <div>
+        <div class="soc-name">Instagram</div>
+        <div class="soc-handle">@danarcapital</div>
+      </div>
+      <div class="soc-arrow">↗</div>
+    </a>
+    <a href="https://x.com/Danar_Capital" class="soc-card" target="_blank">
+      <div>
+        <div class="soc-name">X (Twitter)</div>
+        <div class="soc-handle">@Danar_Capital</div>
+      </div>
+      <div class="soc-arrow">↗</div>
+    </a>
+    <a href="https://t.me/Danarcapital" class="soc-card" target="_blank">
+      <div>
+        <div class="soc-name">Telegram</div>
+        <div class="soc-handle">@Danarcapital</div>
+      </div>
+      <div class="soc-arrow">↗</div>
+    </a>
+    <a href="https://www.snapchat.com/@danar_capital" class="soc-card" target="_blank">
+      <div>
+        <div class="soc-name">Snapchat</div>
+        <div class="soc-handle">@danar_capital</div>
+      </div>
+      <div class="soc-arrow">↗</div>
+    </a>
+    <a href="https://www.tiktok.com/@danar.capital" class="soc-card" target="_blank">
+      <div>
+        <div class="soc-name">TikTok</div>
+        <div class="soc-handle">@danar.capital</div>
+      </div>
+      <div class="soc-arrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<div class="disc-bar">
+  ⚠ التداول في الأسواق المالية ينطوي على مخاطر عالية وقد لا يكون مناسبًا لجميع المستثمرين. يرجى التأكد من فهمك الكامل للمخاطر قبل اتخاذ أي قرار استثماري.
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-masthead">
+    <div>
+      <div class="footer-brand-name">Danar Capital</div>
+      <div class="footer-tagline">Est. 2018 — خليجية أصيلة</div>
+      <p class="footer-desc">فريق خليجي متخصص في الأسواق المالية منذ 2018. نقدّم توصيات، تحليلات، ومحافظ استثمارية بمنهج احترافي — مجاناً.</p>
+    </div>
+    <div class="footer-col">
+      <h4>الأقسام</h4>
+      <ul>
+        <li><a href="#about">من نحن</a></li>
+        <li><a href="#services">خدماتنا</a></li>
+        <li><a href="#portfolio">المحفظة</a></li>
+        <li><a href="#partners">شركاؤنا</a></li>
+        <li><a href="#social">تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>الخدمات</h4>
+      <ul>
+        <li><a href="https://t.me/Danarcapital" target="_blank">توصيات التداول</a></li>
+        <li><a href="https://t.me/Danarcapital" target="_blank">التعليم المالي</a></li>
+        <li><a href="https://t.me/+d3WQ547N7FdiYWQ0" target="_blank">المحفظة الاستثمارية</a></li>
+        <li><a href="https://t.me/Danarcapital" target="_blank">البثوث المباشرة</a></li>
+        <li><a href="https://link-pso.xtb.com/pso/FaECo" target="_blank">فتح حساب XTB</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 DANAR CAPITAL — ALL RIGHTS RESERVED</div>
+    <div class="footer-edition">Vol. VII — The Financial Review</div>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const c = document.getElementById('c');
+const cr = document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  c.style.left=mx+'px'; c.style.top=my+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  cr.style.left=rx+'px'; cr.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{c.style.transform='translate(-50%,-50%) scale(2.5)';cr.style.transform='translate(-50%,-50%) scale(1.6)';});
+  el.addEventListener('mouseleave',()=>{c.style.transform='translate(-50%,-50%) scale(1)';cr.style.transform='translate(-50%,-50%) scale(1)';});
+});
+
+// Scroll reveals
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.fade-up,.fade-left').forEach(el=>obs.observe(el));
+
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.boxShadow = window.scrollY>64 ? '0 4px 32px rgba(0,0,0,.08)' : 'none';
+});
+</script>
+</body>
+</html>
